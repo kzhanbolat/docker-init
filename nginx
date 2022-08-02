@@ -1,0 +1,12 @@
+FROM nginx:mainline
+RUN rm /etc/nginx/conf.d/default.conf
+COPY /etc/nginx/conf.d/ /etc/nginx/conf.d/
+EXPOSE 5000
+
+FROM python:3.8
+COPY etc/main /api
+RUN pip install fastapi,uvicorn
+EXPOSE 6000
+CMD ["uvicorn","main:app","--port", "6000"]
+
+

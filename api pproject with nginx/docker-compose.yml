@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  api-nginx:
+    image: nginx:mainline
+    ports:
+      - '8181:8000'
+    volumes:
+        - ./loanbalance.conf:/etc/nginx/conf.d/default.conf
+        - ./web.conf:/etc/nginx/conf.d/web.conf
+    restart: on-failure
+  countries:
+    image: countries:latest
+    restart: on-failure
+    ports:
+      - '9003:9003'
+  capitals:
+    image: capitals:latest
+    restart: on-failure
+    ports:
+      - '9002:9002'
+
+
